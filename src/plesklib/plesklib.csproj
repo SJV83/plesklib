@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IPleskClient.cs" />
     <Compile Include="Models\CustomerAdd.cs" />
     <Compile Include="Models\CustomerAddResult.cs" />
     <Compile Include="Models\EmailAdd.cs" />

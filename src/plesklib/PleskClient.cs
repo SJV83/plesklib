@@ -12,7 +12,7 @@
     using System.Xml.Serialization;
     using System.Linq;
 
-    public class PleskClient
+    public class PleskClient : IPleskClient
     {
         private const string STATUS_OK = "ok";
         private const string STATUS_ERROR = "error";
@@ -36,7 +36,7 @@
             this.password = password;
             this.port = port;
             this.connectioTimeOut = timeout;
-            
+
             this.apiurl = String.Format("{2}://{0}:{1}/enterprise/control/agent.php", hostname, port, https ? "https" : "http");
         }
 
@@ -53,13 +53,13 @@
         {
             string xmlData = String.Empty;
 
-            var encoding = new UTF8Encoding(false);    
+            var encoding = new UTF8Encoding(false);
 
             XmlSerializerNamespaces EmptyNameSpace = new XmlSerializerNamespaces();
             EmptyNameSpace.Add("", "");
 
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(T));
-            
+
             MemoryStream memoryStream = new MemoryStream();
             XmlTextWriter xmlWriter = new XmlTextWriter(memoryStream, encoding);
             xmlWriter.Formatting = Formatting.Indented;
@@ -81,35 +81,35 @@
             using (var stringReader = new StringReader(xmlString))
             {
                 var XR = new XmlTextReader(stringReader);
-                
+
                 if (xmlSerializer.CanDeserialize(XR))
                 {
                     deSerializeObject = (T)xmlSerializer.Deserialize(XR);
                 }
             }
-        
+
             return deSerializeObject;
         }
 
         private string SendHttpRequest(string meesage)
         {
             var result = String.Empty;
-            var bytes = new ASCIIEncoding().GetBytes(meesage);            
+            var bytes = new ASCIIEncoding().GetBytes(meesage);
 
             //Bypass SSL validation.
             System.Net.ServicePointManager.ServerCertificateValidationCallback = delegate
                                                                             (object sender, X509Certificate certificate, X509Chain chain,
                                                                             SslPolicyErrors sslPolicyErrors)
             { return true; };
-            
+
             var request = (HttpWebRequest)WebRequest.Create(this.apiurl);
-            Auth(ref request);            
+            Auth(ref request);
             request.ContentLength = meesage.Length;
 
             using (var requestStream = request.GetRequestStream())
             {
                 requestStream.Write(bytes, 0, bytes.Length);
-                requestStream.Close();                
+                requestStream.Close();
             }
 
             result = GetResponseContent(request);
@@ -128,7 +128,7 @@
         {
             var response = new ApiResponse();
             response.Status = false;
-            
+
             var result = Activator.CreateInstance(typeof(Toutput));
 
             try
@@ -140,7 +140,7 @@
 
                 response.error = DeSerializeObject<ApiErrorResponse>(response.ResponseXmlString);
 
-                if(String.IsNullOrEmpty(response.error.system.status)) //No Error
+                if (String.IsNullOrEmpty(response.error.system.status)) //No Error
                 {
                     result = DeSerializeObject<Toutput>(response.ResponseXmlString);
 
@@ -151,25 +151,25 @@
                     }
                     else
                     {
-                        response.Message = "Result cannot deserialize";                        
+                        response.Message = "Result cannot deserialize";
                     }
-                }                
+                }
             }
             catch (Exception ex)
             {
                 response.Status = false;
                 response.Message = ex.Message;
-                response.MessageDetails = ex.StackTrace;     
-           
+                response.MessageDetails = ex.StackTrace;
+
                 response.error = new ApiErrorResponse();
                 response.error.system.errtext = ex.Message;
-                response.error.system.status = "error";                         
+                response.error.system.status = "error";
             }
-            
+
             var output = result as IResponseResult;
 
-            if(output != null)
-                output.SaveResult(response);                          
+            if (output != null)
+                output.SaveResult(response);
 
             return (Toutput)result;
         }
@@ -193,17 +193,17 @@
             prop.Add(new HostingProperty() { Name = "ftp_login", Value = username });
             prop.Add(new HostingProperty() { Name = "ftp_password", Value = password });
 
-            if (properties != null)            
+            if (properties != null)
                 prop.AddRange(properties);
-            
+
             var add = new WebspaceAddPacket();
             add.webspace.add.genSetup.name = name;
             add.webspace.add.genSetup.ipaddress = ipaddr;
             add.webspace.add.genSetup.OwnerLogin = owner;
             add.webspace.add.hosting.Properties = prop.ToArray();
-            
+
             return ExecuteWebRequest<WebspaceAddPacket, WebSpaceAddResult>(add).ToResult();
-        }        
+        }
 
         public ResponseResult CreateWebSpace(string name, string ipaddr)
         {
@@ -217,7 +217,7 @@
         public ResponseResult CreateWebSpace(string name, string ipaddr, List<HostingProperty> properties)
         {
             var prop = new List<HostingProperty>();
-            
+
             if (properties != null)
                 prop.AddRange(properties);
 
@@ -232,7 +232,7 @@
         public ResponseResult CreateWebSpace(string name, string ipaddr, string planName, List<HostingProperty> properties)
         {
             var prop = new List<HostingProperty>();
-            
+
             if (properties != null)
                 prop.AddRange(properties);
 
@@ -259,7 +259,7 @@
             add.webspace.add.genSetup.OwnerLogin = customerName;
             add.webspace.add.planName = planName;
             add.webspace.add.hosting.Properties = prop.ToArray();
-            
+
             return ExecuteWebRequest<WebspaceAddPacket, WebSpaceAddResult>(add).ToResult();
         }
 
@@ -284,13 +284,13 @@
         }
 
         public ResponseResult CreateWebSpace(string customerName, string name, string ipaddr, string planName)
-        {            
+        {
             var add = new WebspaceAddPacket();
             add.webspace.add.genSetup.name = name;
             add.webspace.add.genSetup.ipaddress = ipaddr;
             add.webspace.add.genSetup.htype = "vrt_hst";
             add.webspace.add.genSetup.OwnerLogin = customerName;
-            add.webspace.add.planName = planName;            
+            add.webspace.add.planName = planName;
 
             return ExecuteWebRequest<WebspaceAddPacket, WebSpaceAddResult>(add).ToResult();
         }
@@ -313,10 +313,10 @@
         #endregion
 
         #region Customers
-        public ResponseResult CreateCustomer(string username, string password, string email, string fullName, string company, string address, string phone, string fax, string city, string state, string postalCode,string country)
+        public ResponseResult CreateCustomer(string username, string password, string email, string fullName, string company, string address, string phone, string fax, string city, string state, string postalCode, string country)
         {
 
-            var add = new CustomerAddPacket();            
+            var add = new CustomerAddPacket();
             add.customer.add.info.status = "0";
             add.customer.add.info.LoginName = username;
             add.customer.add.info.Password = password;
@@ -327,10 +327,10 @@
             add.customer.add.info.Phone = phone;
             add.customer.add.info.PostalCoe = postalCode;
             add.customer.add.info.State = state;
-            add.customer.add.info.Country = country;                        
+            add.customer.add.info.Country = country;
             add.customer.add.info.Fax = fax;
-            add.customer.add.info.City = city;            
-            
+            add.customer.add.info.City = city;
+
             return ExecuteWebRequest<CustomerAddPacket, CustomerAddResult>(add).ToResult();
         }
         #endregion
@@ -339,7 +339,7 @@
         public ServicePlanItem[] GetServicePlans()
         {
             var recieve = new ServicePlanGetPacket();
-            var result =  ExecuteWebRequest<ServicePlanGetPacket, ServicePlanGetResult>(recieve);
+            var result = ExecuteWebRequest<ServicePlanGetPacket, ServicePlanGetResult>(recieve);
 
             return result.servicePlan.results.ToArray();
         }
@@ -347,7 +347,7 @@
 
         #region Site (Domain)
         public ResponseResult CreateSite(int webspaceId, string name, List<HostingProperty> properties)
-        {              
+        {
             var prop = new List<HostingProperty>();
 
             if (properties != null)
@@ -367,13 +367,13 @@
             //prop.Add(new HostingProperty() { Name = "webstat", Value = Webstat }); // none | webalizer | awstats
             //prop.Add(new HostingProperty() { Name = "errdocs", Value = enableErrorDocs ? "true" : "false" });
             //prop.Add(new HostingProperty() { Name = "web_deploy", Value = enableWebDeploy ? "true" : "false" });
-            
+
             var add = new SiteAddPacket();
             add.Site.Add.GenSetup.Name = name;
             add.Site.Add.GenSetup.WebSpaceId = webspaceId;
             add.Site.Add.Hosting.Properties = prop.ToArray();
 
-            return ExecuteWebRequest<SiteAddPacket, SiteAddResult>(add).ToResult();            
+            return ExecuteWebRequest<SiteAddPacket, SiteAddResult>(add).ToResult();
         }
 
         public ResponseResult DeleteSite(string name)
@@ -412,13 +412,13 @@
             var currentsite = GetSite(name);
             var currentSiteResult = currentsite.ToResult();
 
-            if (currentSiteResult.status != STATUS_OK)            
-                return currentSiteResult;            
+            if (currentSiteResult.status != STATUS_OK)
+                return currentSiteResult;
 
             var add = new SiteAliasAddPacket();
             add.siteAlias.createSiteAlias.status = "0"; //0 (alias enabled) 1 (alias disabled) 2 (primary site disabled) 3 (alias disabled, primary site disabled) 8 (alias disabled)
             add.siteAlias.createSiteAlias.SiteId = currentsite.site.receive.result.Id;
-            add.siteAlias.createSiteAlias.AliasName = aliasName;            
+            add.siteAlias.createSiteAlias.AliasName = aliasName;
             //add.siteAlias.createSiteAlias.pref.web = enableWeb ? "1" : "0";
             //add.siteAlias.createSiteAlias.pref.mail = enableMail ? "1" : "0";
             //add.siteAlias.createSiteAlias.pref.tomcat = enableTomcat ? "1" : "0";
@@ -486,7 +486,7 @@
         #endregion
 
         #region Protected Dir
-        public ResponseResult CreateProtectedDir(int siteId, string name, string headerText, 
+        public ResponseResult CreateProtectedDir(int siteId, string name, string headerText,
                                                                     bool ssl = false, bool nonssl = false, bool cgi = false)
         {
             if (String.IsNullOrEmpty(headerText))
@@ -591,8 +591,8 @@
                 }
             }
             else
-            {                                
-                result.ErrorText = "No databases in this domain";                
+            {
+                result.ErrorText = "No databases in this domain";
                 result.ErrorCode = 999;
             }
 
@@ -641,17 +641,17 @@
 
             var list = GetDatabaseList(name);
 
-            if (!list.databaseList.Any())                            
+            if (!list.databaseList.Any())
                 return result;
-            
+
             var currentDb = list.databaseList.Where(m => m.result.name == databaseName).FirstOrDefault();
 
-            if (currentDb == null)            
+            if (currentDb == null)
                 return result;
-            
+
             var getuser = new DatabaseUserGetPacket();
             getuser.database.users.filter.databaseId = currentDb.result.Id;
-            
+
             return ExecuteWebRequest<DatabaseUserGetPacket, DatabaseUserGetResult>(getuser);
         }
 
@@ -694,7 +694,7 @@
             var list = GetDatabaseUserList(name, databaseName);
 
             if (!list.database.users.Any())
-            {                
+            {
                 result.status = STATUS_ERROR;
                 result.ErrorCode = 999;
                 result.ErrorText = "No users in this database";
@@ -754,8 +754,8 @@
             var currentsite = GetSite(name);
             var currentSiteResult = currentsite.ToResult();
 
-            if (currentSiteResult.status != STATUS_OK)            
-                return currentSiteResult;            
+            if (currentSiteResult.status != STATUS_OK)
+                return currentSiteResult;
 
             var delVirt = new VirtualDirectoryDelPacket();
             delVirt.virtdir.remove.siteId = currentsite.site.receive.result.Id;
@@ -798,7 +798,7 @@
             updateVirt.virtdir.update.Properties.DefaultDocs.Search = docs;
 
             return ExecuteWebRequest<VirtualDirectoryDefaultDocsUpdatePacket, VirtualDirectoryUpdateResult>(updateVirt).ToResult();
-            
+
         }
         #endregion
 

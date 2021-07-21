@@ -49,9 +49,9 @@
     {
         public ProtectedDirLocation()
         {
-            this.ssl = new HostingProperty() { Name ="ssl" };
-            this.cgi = new HostingProperty() { Name="cgi" };
-            this.nonssl = new HostingProperty() { Name="nonssl" };
+            this.ssl = new HostingProperty() { Name = "ssl" };
+            this.cgi = new HostingProperty() { Name = "cgi" };
+            this.nonssl = new HostingProperty() { Name = "nonssl" };
         }
 
         [XmlElement("property")]

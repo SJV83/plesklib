@@ -10,7 +10,7 @@
             this.ftpUser = new FtpUserAddFtpUser();
         }
 
-        [XmlElement("ftp-user")] 
+        [XmlElement("ftp-user")]
         public FtpUserAddFtpUser ftpUser { get; set; }
     }
 
@@ -20,26 +20,32 @@
         {
             this.add = new FtpUserAddNode();
         }
-        
-        [XmlElement("add")] 
+
+        [XmlElement("add")]
         public FtpUserAddNode add { get; set; }
     }
 
     public class FtpUserAddNode
     {
-        [XmlElement("name")] 
+        [XmlElement("name")]
         public string username { get; set; }
 
-        [XmlElement("password")] 
+        [XmlElement("password")]
         public string password { get; set; }
 
-        [XmlElement("home")] 
+        [XmlElement("home")]
         public string home { get; set; }
+
+        [XmlElement("create-non-existent")]
+        public bool CreateDirectoryIfNotExists { get; set; }
 
         [XmlElement("quota")]
         public int quota { get; set; }
 
-        [XmlElement("webspace-name")] 
-        public string wespacename { get; set; }
+        [XmlElement("permissions")]
+        public FtpUserGetPermissions permissions { get; set; }
+
+        [XmlElement("webspace-name")]
+        public string webspacename { get; set; }
     }
 }

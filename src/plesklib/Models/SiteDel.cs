@@ -33,7 +33,7 @@
         }
 
         [XmlElement("filter")]
-        public SiteDelFilter filter { get; set; }   
+        public SiteDelFilter filter { get; set; }
     }
 
     public class SiteDelFilter

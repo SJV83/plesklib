@@ -4,7 +4,7 @@
     using System.Xml.Serialization;
 
     [XmlRoot("packet")]
-    public class ServicePlanGetResult :IResponseResult
+    public class ServicePlanGetResult : IResponseResult
     {
         private ApiResponse _response;
 
@@ -19,7 +19,7 @@
 
         public void SaveResult(ApiResponse response)
         {
-            this._response = response;   
+            this._response = response;
         }
 
         public ResponseResult ToResult()
@@ -37,7 +37,7 @@
 
         [XmlArray("get")]
         [XmlArrayItem("result")]
-        public ServicePlanItem[] results { get; set; }        
+        public ServicePlanItem[] results { get; set; }
     }
 
     public class ServicePlanItem
@@ -57,5 +57,5 @@
         [XmlElement("owner-login")]
         public string owner { get; set; }
     }
- 
+
 }

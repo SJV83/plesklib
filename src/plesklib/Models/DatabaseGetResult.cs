@@ -28,14 +28,14 @@
             return _response.ToErrorResult();
         }
     }
-    
+
     public class DatabaseGetDatabaseGetDbNode
     {
         public DatabaseGetDatabaseGetDbNode()
         {
             this.result = new DatabaseGetDatabaseResultNode();
         }
-        
+
         [XmlElement("result")]
         public DatabaseGetDatabaseResultNode result { get; set; }
     }

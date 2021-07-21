@@ -3,7 +3,7 @@
     using System.Xml.Serialization;
 
     [XmlRoot("packet")]
-    public class WebSpaceDelResult :IResponseResult
+    public class WebSpaceDelResult : IResponseResult
     {
         private ApiResponse _response;
 
@@ -13,7 +13,7 @@
             this.webspace = new WebSpaceDelResultWebSpaceNode();
         }
 
-        [XmlElement("webspace")] 
+        [XmlElement("webspace")]
         public WebSpaceDelResultWebSpaceNode webspace { get; set; }
 
         public void SaveResult(ApiResponse response)
@@ -35,7 +35,7 @@
             this.del = new WebSpaceDelResultDelNode();
         }
 
-        [XmlElement("del")] 
+        [XmlElement("del")]
         public WebSpaceDelResultDelNode del { get; set; }
     }
 
@@ -48,5 +48,5 @@
 
         [XmlElement("result")]
         public ResponseResult result { get; set; }
-    }    
+    }
 }

@@ -41,6 +41,6 @@
         [XmlElement("webspace-name")]
         public string webspaceName { get; set; }
     }
-    
+
 
 }

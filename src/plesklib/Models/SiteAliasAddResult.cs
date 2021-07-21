@@ -22,7 +22,7 @@
 
         public ResponseResult ToResult()
         {
-            this.siteAlias.create.result.apiResponse = this._response;                        
+            this.siteAlias.create.result.apiResponse = this._response;
             return this.siteAlias.create.result;
         }
     }
@@ -33,7 +33,7 @@
         {
             this.create = new SiteAliasAddCreateResultNode();
         }
-        
+
         [XmlElement("create")]
         public SiteAliasAddCreateResultNode create { get; set; }
     }

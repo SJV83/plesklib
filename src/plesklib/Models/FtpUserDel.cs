@@ -11,7 +11,7 @@
             this.ftpUser = new FtpUserDelUserNode();
         }
 
-        [XmlElement("ftp-user")] 
+        [XmlElement("ftp-user")]
         public FtpUserDelUserNode ftpUser { get; set; }
     }
 
@@ -22,7 +22,7 @@
             this.del = new FtpUserDelNode();
         }
 
-        [XmlElement("del")] 
+        [XmlElement("del")]
         public FtpUserDelNode del { get; set; }
     }
 
@@ -41,8 +41,5 @@
     {
         [XmlElement("name")]
         public string Name { get; set; }
-
-        [XmlElement("webspace-name")]
-        public string webspaceName { get; set; }
     }
 }

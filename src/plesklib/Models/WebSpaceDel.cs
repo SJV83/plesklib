@@ -21,7 +21,7 @@
             this.del = new WebSpaceDelNode();
         }
 
-        [XmlElement("del")]  
+        [XmlElement("del")]
         public WebSpaceDelNode del { get; set; }
     }
 
@@ -32,13 +32,13 @@
             this.filter = new WebSpaceFilterNode();
         }
 
-        [XmlElement("filter")]  
+        [XmlElement("filter")]
         public WebSpaceFilterNode filter { get; set; }
     }
 
     public class WebSpaceFilterNode
-    {        
-        [XmlElement("name")]  
+    {
+        [XmlElement("name")]
         public string Name { get; set; }
     }
 }

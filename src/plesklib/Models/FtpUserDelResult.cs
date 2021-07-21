@@ -12,7 +12,7 @@
             this._response = new ApiResponse();
             this.ftpUser = new FtpUserDelResultFtpUserNode();
         }
-       
+
         [XmlElement("ftp-user")]
         public FtpUserDelResultFtpUserNode ftpUser { get; set; }
 
@@ -35,7 +35,7 @@
             this.del = new FtpUserDelResultDelNode();
         }
 
-        [XmlElement("del")] 
+        [XmlElement("del")]
         public FtpUserDelResultDelNode del { get; set; }
     }
 
@@ -46,7 +46,7 @@
             this.result = new ResponseResult();
         }
 
-        [XmlElement("result")] 
+        [XmlElement("result")]
         public ResponseResult result { get; set; }
     }
 

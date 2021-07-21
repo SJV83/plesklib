@@ -3,7 +3,7 @@
     using System.Xml.Serialization;
 
     [XmlRoot("packet")]
-    public class VirtualDirectoryAddResult  : IResponseResult
+    public class VirtualDirectoryAddResult : IResponseResult
     {
         private ApiResponse _response;
 
@@ -47,7 +47,7 @@
             this.result = new ResponseResult();
         }
 
-        [XmlElement("result")] 
+        [XmlElement("result")]
         public ResponseResult result { get; set; }
     }
 }

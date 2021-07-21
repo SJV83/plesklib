@@ -3,7 +3,7 @@
     using System.Xml.Serialization;
 
     [XmlRoot("packet")]
-    public class CustomerAddResult  :IResponseResult
+    public class CustomerAddResult : IResponseResult
     {
         private ApiResponse _response;
 

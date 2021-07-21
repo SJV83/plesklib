@@ -10,7 +10,7 @@
             this.virtdir = new VirtualDirectoryUpdateVirtDirNode();
         }
 
-        [XmlElement("virtdir")] 
+        [XmlElement("virtdir")]
         public VirtualDirectoryUpdateVirtDirNode virtdir { get; set; }
     }
 
@@ -22,7 +22,7 @@
             this.update = new VirtualDirectoryUpdateUpdateNode();
         }
 
-        [XmlElement("update")] 
+        [XmlElement("update")]
         public VirtualDirectoryUpdateUpdateNode update { get; set; }
     }
 
@@ -33,13 +33,13 @@
             this.properties = new VirtualDirectoryUpdatePropertiesNode();
         }
 
-        [XmlElement("site-id")] 
+        [XmlElement("site-id")]
         public int SiteId { get; set; }
 
         [XmlElement("name")]
         public string Name { get; set; }
 
-        [XmlElement("properties")] 
+        [XmlElement("properties")]
         public VirtualDirectoryUpdatePropertiesNode properties { get; set; }
     }
 
@@ -57,7 +57,7 @@
     {
         [XmlElement("enabled")]
         public string Enabled { get; set; }
-        
+
         [XmlElement("parent-paths")]
         public bool EnableParenPaths { get; set; }
 

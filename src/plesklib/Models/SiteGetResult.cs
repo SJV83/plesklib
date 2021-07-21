@@ -26,12 +26,12 @@
         {
             if (this._response.Status)
                 return new ResponseResult()
-                                            {
-                                                apiResponse = _response,
-                                                ErrorCode = this.site.receive.result.errcode,
-                                                ErrorText = this.site.receive.result.errtext,
-                                                status = this.site.receive.result.status
-                                            };
+                {
+                    apiResponse = _response,
+                    ErrorCode = this.site.receive.result.errcode,
+                    ErrorText = this.site.receive.result.errtext,
+                    status = this.site.receive.result.status
+                };
             else
                 return this._response.ToErrorResult();
         }
@@ -44,7 +44,7 @@
             this.receive = new SiteGetResultGetNode();
         }
 
-        [XmlElement("get")]      
+        [XmlElement("get")]
         public SiteGetResultGetNode receive { get; set; }
     }
 
@@ -55,7 +55,7 @@
             this.result = new SiteGetResultResultNode();
         }
 
-         [XmlElement("result")]
+        [XmlElement("result")]
         public SiteGetResultResultNode result { get; set; }
     }
 
@@ -141,6 +141,6 @@
         [XmlArray("vrt_hst")]
         [XmlArrayItem("property")]
         public HostingProperty[] Properties { get; set; }
-    }    
+    }
 
 }

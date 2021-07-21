@@ -11,7 +11,7 @@
             this.virtdir = new VirtualDirectoryDefaultDocsVirDirNode();
         }
 
-        [XmlElement("virtdir")] 
+        [XmlElement("virtdir")]
         public VirtualDirectoryDefaultDocsVirDirNode virtdir { get; set; }
 
     }
@@ -23,7 +23,7 @@
             this.update = new VirtualDirectoryDefaultDocsUpdateNode();
         }
 
-        [XmlElement("update")] 
+        [XmlElement("update")]
         public VirtualDirectoryDefaultDocsUpdateNode update { get; set; }
     }
 
@@ -40,7 +40,7 @@
         [XmlElement("name")]
         public string Name { get; set; }
 
-        [XmlElement("properties")] 
+        [XmlElement("properties")]
         public VirtualDirectoryDefaultDocsProperties Properties { get; set; }
     }
 
@@ -51,7 +51,7 @@
             this.DefaultDocs = new VirtualDirectoryDefaultDocsDefaultDocNode();
         }
 
-         [XmlElement("default-doc")]
+        [XmlElement("default-doc")]
         public VirtualDirectoryDefaultDocsDefaultDocNode DefaultDocs { get; set; }
     }
 
@@ -65,7 +65,7 @@
         [XmlElement("enabled")]
         public string Enabled { get; set; }
 
-        [XmlElement("search")]        
+        [XmlElement("search")]
         public string[] Search { get; set; }
     }
 

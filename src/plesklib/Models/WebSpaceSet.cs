@@ -58,7 +58,7 @@
 
         [XmlElement("gen_setup")]
         public WebSpaceSetGenSetupNode gensetup { get; set; }
-        
+
         [XmlElement("limits")]
         public WebSpaceSetLimitsNode limits { get; set; }
 
@@ -67,7 +67,7 @@
 
         [XmlElement("hosting")]
         public WebSpaceSetHostingNode hosting { get; set; }
-        
+
     }
 
     public class WebSpaceSetGenSetupNode
@@ -93,7 +93,7 @@
         [XmlArray("limit")]
         public HostingProperty[] limit { get; set; }
     }
-    
+
     public class WebSpaceSetPrefNode
     {
         [XmlElement("www")]
@@ -114,7 +114,7 @@
             this.stdFwd = new WebSpaceSetHostingStdFwd();
             this.frmFwd = new WebSpaceSetHostingStdFwd();
         }
-        
+
         [XmlElement("www")]
         public WebSpaceSetHostingVrtHstNode vrtHst { get; set; }
 
@@ -151,5 +151,5 @@
         [XmlElement("ip_address")]
         public string ipv6addr { get; set; }
     }
-        
+
 }

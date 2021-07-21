@@ -5,7 +5,7 @@ namespace maestropanel.plesklib
 {
     public interface IPleskClient
     {
-        ResponseResult AddFtpAccount(string name, string username, string password, string home, int quota);
+        ResponseResult AddFtpAccount(string domain, string username, string password, string home, int quota, bool CreateDirectory, bool AllowRead = true, bool AllowWrite = true);
         ResponseResult ChangeDatabaseUserPassword(string name, string databaseName, string username, string newpassword);
         ResponseResult ChangeVirtualDirecotry(string name, string virtualDirectoryName, bool enableParentPaths);
         ResponseResult ConnectionTest();
@@ -31,19 +31,23 @@ namespace maestropanel.plesklib
         ResponseResult DeleteAlias(string name);
         ResponseResult DeleteDatabase(string name, string databaseName);
         ResponseResult DeleteDatabaseUser(string name, string databaseName, string username);
-        ResponseResult DeleteFtpAccount(string name, string username);
+        ResponseResult DeleteFtpAccount(string webspaceName, string username);
         ResponseResult DeleteSite(string name);
         ResponseResult DeleteSubdomain(string name);
         ResponseResult DeleteVirtualDirectory(string name, string virtualDirectoryName);
         ResponseResult DeleteWebSpace(string name);
         T DeSerializeObject<T>(string xmlString);
+        FtpUserGetAllResult GetAllFtpAccounts(int webspaceId = 1);
         DatabaseGetResult GetDatabaseList(string name);
         DatabaseUserGetResult GetDatabaseUserList(string name, string databaseName);
+        FtpUserGetResult GetFtpAccount(int accountId = 0);
         IPAddrGetResult GetIPAddressList();
         ServicePlanItem[] GetServicePlans();
         SiteGetResult GetSite(string name);
         WebSpaceGetResult GetWebSpace(string name);
         string SerializeObjectToXmlString<T>(T TModel);
         ResponseResult SetDefaultDocs(string name, string virtualDirectoryName, string[] docs);
+        FtpUserUpdateResult UpdateFtpAccount(int userId, string homedir = "", FtpUserGetPermissions permissions = null);
+        FtpUserUpdateResult UpdateFtpAccount(string ftpName, string homedir = "", FtpUserGetPermissions permissions = null);
     }
 }

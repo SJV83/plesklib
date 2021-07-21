@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Xml.Serialization;
-    
+
     [XmlRoot("packet")]
     public class SiteAddPacket
     {
@@ -11,7 +11,7 @@
             this.Site = new Site();
         }
 
-        [XmlElement("site")]        
+        [XmlElement("site")]
         public Site Site { get; set; }
     }
 
@@ -55,7 +55,7 @@
         [XmlArray("vrt_hst")]
         [XmlArrayItem("property")]
         public HostingProperty[] Properties { get; set; }
-        
+
         public Hosting()
         {
             Properties = new List<HostingProperty>().ToArray();
@@ -65,7 +65,7 @@
     public class HostingProperty
     {
         [XmlElement("name")]
-        public string Name{ get; set; }
+        public string Name { get; set; }
 
         [XmlElement("value")]
         public string Value { get; set; }

@@ -42,7 +42,7 @@
     }
 
     public class SiteGetFilterNode
-    {        
+    {
         [XmlElement("name")]
         public string Name { get; set; }
     }

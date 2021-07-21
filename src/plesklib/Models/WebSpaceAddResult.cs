@@ -13,12 +13,12 @@
             this.webspace = new WebSpaceAddResultNode();
         }
 
-        [XmlElement("webspace")]  
+        [XmlElement("webspace")]
         public WebSpaceAddResultNode webspace { get; set; }
 
         public void SaveResult(ApiResponse response)
         {
-            this._response = response;            
+            this._response = response;
         }
 
         public ResponseResult ToResult()
@@ -35,7 +35,7 @@
             this.add = new WebSpaceAddResultAddNode();
         }
 
-        [XmlElement("add")]  
+        [XmlElement("add")]
         public WebSpaceAddResultAddNode add { get; set; }
     }
 
@@ -46,7 +46,7 @@
             this.result = new ResponseResult();
         }
 
-        [XmlElement("result")]  
+        [XmlElement("result")]
         public ResponseResult result { get; set; }
     }
 }

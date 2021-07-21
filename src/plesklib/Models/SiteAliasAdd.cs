@@ -7,14 +7,14 @@
     {
 
         public SiteAliasAddPacket()
-        {            
+        {
             this.siteAlias = new SiteAliasAddNode();
         }
 
         [XmlElement("site-alias")]
         public SiteAliasAddNode siteAlias { get; set; }
     }
-    
+
     public class SiteAliasAddNode
     {
         public SiteAliasAddNode()

@@ -11,7 +11,7 @@
         {
             this.virtdir = new VirtualDirectoryUpdateResultVirDirNode();
             this._response = new ApiResponse();
-            
+
         }
 
         public void SaveResult(ApiResponse response)

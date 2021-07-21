@@ -11,7 +11,7 @@
             this.webspace = new WebSpaceNode();
         }
 
-        [XmlElement("webspace")]  
+        [XmlElement("webspace")]
         public WebSpaceNode webspace { get; set; }
     }
 
@@ -22,7 +22,7 @@
             this.add = new WebSpaceAddNode();
         }
 
-        [XmlElement("add")]  
+        [XmlElement("add")]
         public WebSpaceAddNode add { get; set; }
     }
 
@@ -34,13 +34,13 @@
             this.hosting = new WebSpaceHostingNode();
         }
 
-        [XmlElement("gen_setup")]  
+        [XmlElement("gen_setup")]
         public WebSpaceGenSetup genSetup { get; set; }
 
-        [XmlElement("hosting")]  
+        [XmlElement("hosting")]
         public WebSpaceHostingNode hosting { get; set; }
 
-        [XmlElement("plan-name")]  
+        [XmlElement("plan-name")]
         public string planName { get; set; }
     }
 
@@ -53,7 +53,7 @@
         public string ipaddress { get; set; }
 
         [XmlElement("htype")]
-        public string htype  { get; set; }
+        public string htype { get; set; }
 
         [XmlElement("owner-login")]
         public string OwnerLogin { get; set; }
@@ -68,6 +68,6 @@
 
         [XmlArray("vrt_hst")]
         [XmlArrayItem("property")]
-        public HostingProperty[] Properties{ get; set; }
-    }    
+        public HostingProperty[] Properties { get; set; }
+    }
 }

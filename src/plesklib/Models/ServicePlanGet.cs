@@ -10,7 +10,7 @@
             this.servicePlan = new ServicePlanGetServicePlanNode();
         }
 
-        [XmlElement("service-plan")]  
+        [XmlElement("service-plan")]
         public ServicePlanGetServicePlanNode servicePlan { get; set; }
     }
 
@@ -22,7 +22,7 @@
             this.receive = new ServicePlanGetGetNode();
         }
 
-        [XmlElement("get")]  
+        [XmlElement("get")]
         public ServicePlanGetGetNode receive { get; set; }
 
     }
@@ -34,7 +34,7 @@
             this.filter = new ServicePlanGetFilterNode();
         }
 
-        [XmlElement("filter")]  
+        [XmlElement("filter")]
         public ServicePlanGetFilterNode filter { get; set; }
     }
 

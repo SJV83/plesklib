@@ -10,21 +10,21 @@
             this.virt = new VirtualDirectoryAddVirtNode();
         }
 
-        [XmlElement("virtdir")] 
+        [XmlElement("virtdir")]
         public VirtualDirectoryAddVirtNode virt { get; set; }
     }
 
 
     public class VirtualDirectoryAddVirtNode
-	{
+    {
         public VirtualDirectoryAddVirtNode()
         {
             this.create = new VirtualDirectoryAddCreateNode();
         }
 
-        [XmlElement("create")] 
+        [XmlElement("create")]
         public VirtualDirectoryAddCreateNode create { get; set; }
-	}
+    }
 
     public class VirtualDirectoryAddCreateNode
     {
@@ -63,7 +63,7 @@
         public string Enabled { get; set; }
 
         [XmlElement("parent-paths")]
-        public bool parentPaths  { get; set; }
+        public bool parentPaths { get; set; }
 
         [XmlElement("run-in-mta")]
         public bool RunInMta { get; set; }

@@ -14,6 +14,9 @@
         [XmlElement("errtext")]
         public string ErrorText { get; set; }
 
+        [XmlElement("filter-id")]
+        public string FilterId { get; set; }
+
         [XmlElement("id")]
         public string Id { get; set; }
 

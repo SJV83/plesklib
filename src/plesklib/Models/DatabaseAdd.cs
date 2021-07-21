@@ -26,7 +26,7 @@
     }
 
     public class DatabaseAddDbAddNode
-    {   
+    {
         [XmlElement("webspace-id")]
         public int webspaceid { get; set; }
 

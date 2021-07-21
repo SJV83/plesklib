@@ -25,10 +25,13 @@
         public ResponseResult ToResult()
         {
             if (this._response.Status)
-                return new ResponseResult() { apiResponse = _response, 
-                                                ErrorCode = this.webspace.getWebSpace.result.errcode, 
-                                                ErrorText = this.webspace.getWebSpace.result.errtext, 
-                                                status = this.webspace.getWebSpace.result.status };
+                return new ResponseResult()
+                {
+                    apiResponse = _response,
+                    ErrorCode = this.webspace.getWebSpace.result.errcode,
+                    ErrorText = this.webspace.getWebSpace.result.errtext,
+                    status = this.webspace.getWebSpace.result.status
+                };
             else
                 return this._response.ToErrorResult();
         }
@@ -47,10 +50,10 @@
 
 
     public class WebSpaceGetResultGetNode
-    {        
+    {
         public WebSpaceGetResultGetNode()
         {
-            this.result = new WebSpaceGetResultResultNode();   
+            this.result = new WebSpaceGetResultResultNode();
         }
 
         [XmlElement("result")]
@@ -170,13 +173,13 @@
         [XmlElement("dest_url")]
         public string destinationUrl { get; set; }
     }
-    
+
     public class WebSpaceGetResultFrmFwdNode
     {
         [XmlElement("dest_url")]
         public string destinationUrl { get; set; }
     }
-    
+
     public class WebSpaceGetResultStatsNode
     {
         [XmlElement("traffic")]

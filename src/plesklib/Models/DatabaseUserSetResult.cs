@@ -20,7 +20,7 @@
         {
             this._response = response;
         }
-        
+
         public ResponseResult ToResult()
         {
             this.database.setDbUser.result.apiResponse = _response;

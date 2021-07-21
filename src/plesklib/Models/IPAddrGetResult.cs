@@ -68,7 +68,7 @@
         public int ErrorCode { get; set; }
 
         [XmlElement("errtext")]
-        public string ErrorText { get; set; }        
+        public string ErrorText { get; set; }
 
         [XmlArray("addresses")]
         [XmlArrayItem("ip_info")]

@@ -18,7 +18,7 @@
 
         public void SaveResult(ApiResponse response)
         {
-            this._response = response;            
+            this._response = response;
         }
 
         public ResponseResult ToResult()

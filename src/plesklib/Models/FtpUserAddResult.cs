@@ -3,7 +3,7 @@
     using System.Xml.Serialization;
 
     [XmlRoot("packet")]
-    public class FtpUserAddResult :IResponseResult
+    public class FtpUserAddResult : IResponseResult
     {
         private ApiResponse _response;
 
@@ -18,7 +18,7 @@
 
         public void SaveResult(ApiResponse response)
         {
-            _response = response;            
+            _response = response;
         }
 
         public ResponseResult ToResult()
@@ -35,7 +35,7 @@
             this.add = new FtpUserAddResultAddNode();
         }
 
-        [XmlElement("add")] 
+        [XmlElement("add")]
         public FtpUserAddResultAddNode add { get; set; }
     }
 
@@ -46,8 +46,8 @@
             this.result = new ResponseResult();
         }
 
-        [XmlElement("result")] 
+        [XmlElement("result")]
         public ResponseResult result { get; set; }
     }
-    
+
 }

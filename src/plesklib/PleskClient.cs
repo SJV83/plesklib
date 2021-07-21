@@ -4,17 +4,18 @@
     using System;
     using System.Collections.Generic;
     using System.IO;
+    using System.Linq;
     using System.Net;
     using System.Net.Security;
     using System.Security.Cryptography.X509Certificates;
     using System.Text;
     using System.Xml;
     using System.Xml.Serialization;
-    using System.Linq;
 
     public class PleskClient : IPleskClient
     {
         private const string STATUS_OK = "ok";
+
         private const string STATUS_ERROR = "error";
 
         private string apiurl;
@@ -26,7 +27,19 @@
 
         public PleskClient()
         {
+            var model = new TestModels.packet();
+            model.ftpuser = new TestModels.packetFtpuser();
+            model.ftpuser.set = new TestModels.packetFtpuserSet();
+            model.ftpuser.set.filter = new TestModels.packetFtpuserSetFilter()
+            {
+            };
+            model.ftpuser.set.values = new TestModels.packetFtpuserSetValues()
+            {
+                permissions = new TestModels.packetFtpuserSetValuesPermissions()
+                {
 
+                }
+            };
         }
 
         public PleskClient(string hostname, string username, string password, string port = "8443", bool https = true, int timeout = 10000)
@@ -516,23 +529,77 @@
         #endregion
 
         #region Ftp Account
-        public ResponseResult AddFtpAccount(string name, string username, string password, string home, int quota)
+        public ResponseResult AddFtpAccount(string domain, string username, string password, string home, int quota, bool CreateDirectory, bool AllowRead = true, bool AllowWrite = true)
         {
             var add = new FtpUserAddPacket();
-            add.ftpUser.add.wespacename = name;
+            add.ftpUser.add.webspacename = domain;
             add.ftpUser.add.username = username;
             add.ftpUser.add.password = password;
             add.ftpUser.add.home = home;
             add.ftpUser.add.quota = quota;
+            add.ftpUser.add.CreateDirectoryIfNotExists = CreateDirectory;
+            add.ftpUser.add.permissions = new FtpUserGetPermissions() { read = AllowRead, write = AllowWrite };
 
             return ExecuteWebRequest<FtpUserAddPacket, FtpUserAddResult>(add).ToResult();
         }
 
-        public ResponseResult DeleteFtpAccount(string name, string username)
+        public FtpUserGetResult GetFtpAccount(int accountId = 0)
+        {
+            var get = new FtpUserGetPacket();
+            get.ftpUser.get.filter.Id = accountId;
+
+            return ExecuteWebRequest<FtpUserGetPacket, FtpUserGetResult>(get);
+        }
+
+        public FtpUserUpdateResult UpdateFtpAccount(int userId, string homedir = "", FtpUserGetPermissions permissions = null)
+        {
+            var set = new FtpUserUpdatePacket();
+            set.ftpUser.set.filter.Id = userId;
+            if (!string.IsNullOrEmpty(homedir))
+            {
+                set.ftpUser.set.values.home = homedir;
+                set.ftpUser.set.values.CreateDirectoryIfNotExists = true;
+            }
+
+            if (permissions != null)
+            {
+                set.ftpUser.set.values.permissions = permissions;
+            }
+
+            return ExecuteWebRequest<FtpUserUpdatePacket, FtpUserUpdateResult>(set);
+        }
+
+        public FtpUserUpdateResult UpdateFtpAccount(string ftpName, string homedir = "", FtpUserGetPermissions permissions = null)
+        {
+            var set = new FtpUserUpdatePacket();
+            set.ftpUser.set.filter.Name = ftpName;
+            if (!string.IsNullOrEmpty(homedir))
+            {
+                set.ftpUser.set.values.home = homedir;
+                set.ftpUser.set.values.CreateDirectoryIfNotExists = true;
+            }
+
+            if (permissions != null)
+            {
+                set.ftpUser.set.values.permissions = permissions;
+            }
+
+            return ExecuteWebRequest<FtpUserUpdatePacket, FtpUserUpdateResult>(set);
+        }
+
+        public FtpUserGetAllResult GetAllFtpAccounts(int webspaceId = 1)
+        {
+            var get = new FtpUserGetAll();
+            get.ftpUser.AllFtpUsers.Filter.WebspaceId = webspaceId;
+
+
+            return ExecuteWebRequest<FtpUserGetAll, FtpUserGetAllResult>(get);
+        }
+
+        public ResponseResult DeleteFtpAccount(string webspaceName, string username)
         {
             var del = new FtpUserDelPacket();
             del.ftpUser.del.filter.Name = username;
-            del.ftpUser.del.filter.webspaceName = name;
 
             return ExecuteWebRequest<FtpUserDelPacket, FtpUserDelResult>(del).ToResult();
         }

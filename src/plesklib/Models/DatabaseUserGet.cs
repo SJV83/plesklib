@@ -37,7 +37,7 @@
     }
 
     public class DatabaseUserGetFilterNode
-    {        
+    {
         [XmlElement("db-id")]
         public int databaseId { get; set; }
     }

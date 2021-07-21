@@ -22,7 +22,7 @@
         }
 
         [XmlElement("add")]
-        public CustomerAddAddNode add { get; set; }        
+        public CustomerAddAddNode add { get; set; }
     }
 
     public class CustomerAddAddNode

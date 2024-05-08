@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C9812B99-86A4-41BC-88AE-1C45F469EE51}</ProjectGuid>
+    <ProjectGuid>{FE9AE5B1-55D5-4EEA-AFB1-0FA15377867F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>maestropanel.plesklib</RootNamespace>
